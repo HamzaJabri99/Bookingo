@@ -1,0 +1,41 @@
+.fhomes{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.fhomesItem{
+    flex: 1;
+    gap: 10px;
+display: flex;
+flex-direction: column;
+}
+.fhomesImg{
+    object-fit:cover ;
+    
+    width: 100%;
+}
+.fhomesName{
+    font-weight: bold;
+}
+.fhomesCity{
+    text-transform: capitalize;
+    color: grey;
+    font-weight: 300;
+    font-size: 14px;
+}
+.fhomesPrice{
+    font-weight: 500;
+}
+.fhomesRating>button{
+background-color: #003580;
+color: white;
+border: none;
+margin-right: 10px;
+padding: 3px;
+font-weight: bold;
+}
+.fhomesRating>span{
+font-size: 14px;
+}
