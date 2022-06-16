@@ -5,8 +5,6 @@ import { useLocation } from "react-router";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import SearchItem from "../../components/searchItem/SearchItem";
 
 const List = () => {
