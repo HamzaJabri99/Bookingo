@@ -2,9 +2,15 @@ import "./hotel.css";
 import Header from "../../components/header/Header";
 import Navbar from "../../components/navbar/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleArrowLeft,
+  faCircleArrowRight,
+  faCircleXmark,
+  faLocationDot,
+} from "@fortawesome/free-solid-svg-icons";
 import MailList from "../../components/mailList/MailList";
 import Footer from "../../components/footer/Footer";
+import { useState } from "react";
 
 const Hotel = () => {
   const images = [
@@ -33,11 +39,48 @@ const Hotel = () => {
       src: "https://cf.bstatic.com/xdata/images/hotel/max300/336417087.jpg?k=6233ad5fd979d9257206cf58e9b6ec10d6b56067ed0a23c86630266279c94f81&o=&hp=1",
     },
   ];
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [slider, setSlider] = useState(false);
+  const handleSlider = (index) => {
+    setSlideIndex(index);
+    setSlider(!slider);
+  };
+  const handleIndex = (action) => {
+    let newIndex;
+    if (action === "d") {
+      newIndex = slideIndex === 0 ? images.length - 1 : slideIndex - 1;
+    } else {
+      newIndex = slideIndex === images.length - 1 ? 0 : slideIndex + 1;
+    }
+    setSlideIndex(newIndex);
+  };
   return (
     <div>
       <Navbar />
       <Header type="list" />
       <div className="hotelContainer">
+        {slider && (
+          <div className="slider">
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              className="close"
+              onClick={() => setSlider(false)}
+            />
+            <FontAwesomeIcon
+              icon={faCircleArrowLeft}
+              className="arrow"
+              onClick={() => handleIndex("d")}
+            />
+            <div className="sliderWrapper">
+              <img src={images[slideIndex].src} alt="" className="sliderImg" />
+            </div>
+            <FontAwesomeIcon
+              icon={faCircleArrowRight}
+              className="arrow"
+              onClick={() => handleIndex("i")}
+            />
+          </div>
+        )}
         <div className="hotelWrapper">
           <button className="bookNow">Reserve or Book Now!</button>
           <h1 className="hotelTitle">Park Lane New York</h1>
@@ -52,9 +95,10 @@ const Hotel = () => {
             Book a stay over $114 at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
-            {images.map((item) => (
+            {images.map((item, index) => (
               <div className="hotelImgWrapper" key={item.id}>
                 <img
+                  onClick={() => handleSlider(index)}
                   src={item.src}
                   alt="hotel images"
                   className="hotelImg"
